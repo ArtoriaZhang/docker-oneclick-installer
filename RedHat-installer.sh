@@ -32,4 +32,4 @@ fi
 if [[ ! -f ${docker_compose}.rpm ]]; then
 	curl -OL https://download.docker.com/linux/rhel/8/x86_64/stable/Packages/${docker_compose}.rpm 
 fi
-	sudo dnf install ${containerd}.rpm ${buildx}.rpm ${docker-ce}.rpm ${docker-ce-cli}.rpm ${docker-compose}.rpm
+	sudo dnf install ${containerd}.rpm ${buildx}.rpm ${docker_ce}.rpm ${docker_ce_cli}.rpm ${docker_compose}.rpm
