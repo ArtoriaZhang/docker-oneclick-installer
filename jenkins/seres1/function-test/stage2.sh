@@ -1,6 +1,18 @@
 #!/bin/sh
 def stage1() {
-	echo 'stage1'
+	echo 'Execute remotely stage1'
+	        environment {
+
+                    NEXUS_CREDS = credentials('OrcaMesGit')
+                    NEXUS_USER = "$NEXUS_CREDS_USR"
+                    NEXUS_PASSWORD = "$NEXUS_CREDS_PSW"
+                }
+                // git branch: '${B}', credentialsId: 'OrcaMesGit', url: 'http://gitlab.ieccloud.hollicube.com/seres/quality-management-platform-two.git'
+		dir('seres-function-test') {
+                    git branch: '${B}', credentialsId: 'OrcaMesGit', url: 'http://192.168.200.54:8929/seres/seres-function-test.git'
+                }
+
+                git branch: '${B}', credentialsId: 'OrcaMesGit', url: 'http://192.168.200.54:8929/seres/quality-management-platform-one.git'
 }
 
 def stage2() {
