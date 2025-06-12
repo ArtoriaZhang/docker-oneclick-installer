@@ -11,8 +11,8 @@ def stage2() {
             sh 'cd quality-alarm-engine && pwd'
             sh 'pwd'
             
-        }
 	echo 'stage2'
+        }
 }
 
 def stage3() {
