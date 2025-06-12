@@ -1,2 +1,11 @@
 #!/bin/sh
-echo 'hello'
+def stage1() {
+	echo 'stage1'
+}
+
+def stage2() {
+
+	echo 'stage2'
+}
+
+return this
