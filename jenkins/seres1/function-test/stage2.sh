@@ -44,6 +44,9 @@ def stage3() {
                             
                             sh "cd quality-data-process && docker build --load -t ${aliyun}/hollysys-seres1-quality-data-process:${engineV} ./"
                             sh "docker push ${aliyun}/hollysys-seres1-quality-data-process:${engineV} "
+			    
+                            sh "cd seres-function-test && docker build --load -t ${aliyun}/hollysys-seres1-function-test:${engineV} ./"
+                            sh "docker push ${aliyun}/hollysys-seres1-function-test:${engineV} "
                         }
 	}
                    } else {
