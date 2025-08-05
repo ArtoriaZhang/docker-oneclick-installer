@@ -22,7 +22,7 @@ def stage2() {
 	withCredentials([usernamePassword(credentialsId: 'OrcaMesGit', passwordVariable: 'PAS', usernameVariable: 'USER')]) {
 	echo 'Execute remotely'
 	sh 'cd seres-function-test-ui && npm install && npm run build'
-        sh '${MAVEN_HOME}/bin/mvn -s ./quality-alarm-engine/orca-settings.xml -pl "!bff,!data-acquisition,!manual-entry-system,!miot-interface,!multisystem-data-integration,!platform-data-monitor,!quality-alarm,!operation-monitor,!quality-archives,!quality-base-setting,!quality-monitor-board,!quality-statistics-analyze,!quality-statistics-analyze"  -Dnexus.pass=public -Dnexus.user=public clean deploy '
+        sh '${MAVEN_HOME}/bin/mvn -s ./quality-alarm-engine/orca-settings.xml -pl "!bff,!data-acquisition,!manual-entry-system,!miot-interface,!multisystem-data-integration,!platform-data-monitor,!quality-alarm,!operation-monitor,!quality-archives,!quality-base-setting,!quality-statistics-analyze,!quality-statistics-analyze"  -Dnexus.pass=public -Dnexus.user=public clean deploy '
         sh 'cd seres-function-test && ${MAVEN_HOME}/bin/mvn  -Dnexus.pass=public -Dnexus.user=public clean package '
 	sh 'cd quality-alarm-engine && pwd'
 	echo 'Stage2 end.'
@@ -48,6 +48,9 @@ def stage3() {
                             
                             sh "cd quality-data-process && docker build --load -t ${aliyun}/hollysys-seres1-quality-data-process:${engineV} ./"
                             sh "docker push ${aliyun}/hollysys-seres1-quality-data-process:${engineV} "
+
+                            sh "cd quality-monitor-board && docker build --load -t ${aliyun}/hollysys-seres1-quality-monitor-board:${engineV} ./"
+                            sh "docker push ${aliyun}/hollysys-seres1-quality-monitor-board:${engineV} "
 			    
                             sh "cd seres-function-test && docker build --load -t ${aliyun}/hollysys-seres1-function-test:${engineV} ./"
                             sh "docker push ${aliyun}/hollysys-seres1-function-test:${engineV} "
